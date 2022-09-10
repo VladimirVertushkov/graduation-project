@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    protected $namespace = 'App\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -26,16 +26,16 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->configureRateLimiting();
+        parent::boot();
+    }
 
-        $this->routes(function () {
-            Route::middleware('api')
-                ->prefix('api')
-                ->group(base_path('routes/api.php'));
+    public function map()
+    {
+        $this->mapApiRoutes();
 
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
-        });
+        $this->mapWebRoutes();
+        $this->mapEntityRoutes('users', 'Users');
+        $this->mapEntityRoutes('auth', 'Auth');
     }
 
     /**
@@ -48,5 +48,32 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+    }
+
+    private function mapApiRoutes()
+    {
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
+    }
+
+    private function mapWebRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+    }
+
+    private function mapEntityRoutes(string $entityName, string $camelCase)
+    {
+        $lowercase = strtolower($entityName);
+        //$camelCase = ucfirst($entityName);
+
+
+        Route::prefix('api/'.$lowercase)
+            ->middleware('web')
+            ->namespace('App\Entities\\'.$camelCase.'\Http\Controllers')
+            ->group(app_path('Entities/'.$camelCase.'/Http/Routes/'.$lowercase.'.php'));
     }
 }

@@ -42,6 +42,18 @@ return [
         ],
     ],
 
+//    'guards' => [
+//        'web' => [
+//            'driver' => 'session',
+//            'provider' => 'users',
+//        ],
+//
+//        'api' => [
+//            'driver' => 'passport',
+//            'provider' => 'users',
+//        ],
+//    ],
+
     /*
     |--------------------------------------------------------------------------
     | User Providers
@@ -62,7 +74,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Entities\Users\Models\User::class,
         ],
 
         // 'users' => [
