@@ -26,4 +26,15 @@ class UsersController extends ControllerBase
         ]);
     }
 
+    public function get(Request $request)
+    {
+        $response = $this->userService->get($request->all());
+        return $this->response(['status' => 'ok', 'data' => $response]);
+    }
+
+    public function show(Request $request, string $id)
+    {
+        $response = $this->userService->show($id);
+        return $this->response(['status' => 'ok', 'data' => $response]);
+    }
 }

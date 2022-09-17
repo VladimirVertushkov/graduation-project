@@ -4,16 +4,11 @@ namespace App\Entities\Users\Services;
 
 use App\Base\Services\ServiceBase;
 use App\Entities\Users\Models\User;
+use App\Entities\Users\Resources\UserGetResource;
 use Illuminate\Support\Facades\Hash;
 
 class UsersService extends ServiceBase
 {
-
-    public function show(string $id)
-    {
-
-    }
-
     public function save(
         array $data,
         string $id = null,
@@ -29,5 +24,20 @@ class UsersService extends ServiceBase
         $user->save();
 
         return $user->id;
+    }
+
+    public function get(array $data)
+    {
+        $users = User::get();
+
+        return UserGetResource::collection($users)->toArray(request());
+    }
+
+
+    public function show(string $id)
+    {
+        $user = User::findOrFail($id);
+
+        return new UserGetResource($user);
     }
 }

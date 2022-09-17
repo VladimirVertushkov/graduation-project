@@ -3,6 +3,10 @@
 use App\Entities\Users\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/{id}', [UsersController::class, 'show']);
+    Route::get('/', [UsersController::class, 'get']);
+});
 //Route::middleware(['auth:api'])->group(function () {
 //    Route::prefix('/executors')->group(function () {
 //        Route::get('/forDropdown', [UsersController::class, 'getExecutors']);
