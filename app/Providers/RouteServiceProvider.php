@@ -34,8 +34,9 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
-        $this->mapEntityRoutes('users', 'Users');
-        $this->mapEntityRoutes('auth', 'Auth');
+        $this->mapEntityRoutes('users');
+        $this->mapEntityRoutes('auth');
+        $this->mapEntityRoutes('countries');
     }
 
     /**
@@ -65,10 +66,10 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/web.php'));
     }
 
-    private function mapEntityRoutes(string $entityName, string $camelCase)
+    private function mapEntityRoutes(string $entityName)
     {
         $lowercase = strtolower($entityName);
-        //$camelCase = ucfirst($entityName);
+        $camelCase = ucfirst($entityName);
 
 
         Route::prefix('api/'.$lowercase)

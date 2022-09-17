@@ -3,12 +3,18 @@
 namespace App\Entities\Users\Services;
 
 use App\Base\Services\ServiceBase;
+use App\Entities\Countries\Models\Country;
 use App\Entities\Users\Models\User;
 use App\Entities\Users\Resources\UserGetResource;
 use Illuminate\Support\Facades\Hash;
 
 class UsersService extends ServiceBase
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function save(
         array $data,
         string $id = null,
@@ -22,6 +28,10 @@ class UsersService extends ServiceBase
         $user->date_of_birth = $data['dateOfBirth'] ?? '';
 
         $user->save();
+
+        $a = new Country();
+        $a->name = $data['name'] ?? '';
+        $a->save();
 
         return $user->id;
     }

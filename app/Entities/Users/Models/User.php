@@ -21,7 +21,6 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends BaseUserModel
 {
     use Notifiable;
-
     //use SoftDeletes;
     //use CanResetPassword;
     use HasApiTokens;
