@@ -29,10 +29,6 @@ class UsersService extends ServiceBase
 
         $user->save();
 
-        $a = new Country();
-        $a->name = $data['name'] ?? '';
-        $a->save();
-
         return $user->id;
     }
 
