@@ -66,6 +66,7 @@ class Country extends Model
 
     /**
      * @var array
+     *
      */
     protected $hidden = [];
 
@@ -85,8 +86,8 @@ class Country extends Model
     /**
      * @return HasMany
      */
-    public function competition(): HasMany
+    public function competitions(): HasMany
     {
-        return $this->hasMany(Competition::class, 'admin_id');
+        return $this->hasMany(Competition::class, 'country_id');
     }
 }

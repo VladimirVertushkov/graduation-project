@@ -13,7 +13,7 @@ class CountriesService extends ServiceBase
         parent::__construct();
     }
 
-    public function get(array $all)
+    public function get(array $data)
     {
         $countries = Country::get();
 
