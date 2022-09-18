@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Entities\Competitions\Resources;
+namespace App\Entities\Groups\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CompetitionGetResources extends JsonResource
+class GroupGetResources extends JsonResource
 {
     public function toArray($request)
     {
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'priority' => $this->priority,
-            'country' => $this->country->name,
+            'admin' => $this->admin->name,
+            'competition' => $this->competition->name,
             'createdAt' => $this->created_at,
         ];
     }

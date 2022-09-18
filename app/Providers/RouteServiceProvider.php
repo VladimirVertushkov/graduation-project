@@ -38,6 +38,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapEntityRoutes('auth');
         $this->mapEntityRoutes('countries');
         $this->mapEntityRoutes('competitions');
+        $this->mapEntityRoutes('groups');
     }
 
     /**
