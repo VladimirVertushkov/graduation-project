@@ -5,6 +5,7 @@ namespace App\Entities\Auth\Services;
 use App\Base\Services\ServiceBase;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use Illuminate\Support\Str;
 
 /**
  * Class AuthService
@@ -18,6 +19,7 @@ class AuthService extends ServiceBase
         string $password,
         string $deviceName = null,
     ): array {
+
         $credentials = ['email' => $email, 'password' => $password];
 
         if (!Auth::once($credentials)) {
@@ -25,6 +27,9 @@ class AuthService extends ServiceBase
         }
 
         $user = Auth::user();
+        if (in_array($deviceName, $user->tokens->pluck('name')->toArray())) {
+            $user->tokens()->where('name', $deviceName)->delete();
+        }
 
         $token = $user->createToken($deviceName);
 
@@ -40,6 +45,13 @@ class AuthService extends ServiceBase
 //            'token' => $token->accessToken,
 //            'expires_at' => Carbon::parse($token->token->expires_at)->timestamp
 //        ];
+    }
+
+    public function logout(mixed $token)
+    {
+        $user = Auth::user();
+        $tokenId = Str::before($token, '|');
+        $user->tokens()->where('id', $tokenId )->delete();
     }
 
 }

@@ -36,6 +36,7 @@ class LoginController extends ControllerBase
 
     public function logout(Request $request)
     {
-        dd(11);
+        $this->authService->logout($request->token);
+        return $this->response(['status' => 'ok']);
     }
 }
