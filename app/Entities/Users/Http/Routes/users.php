@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/{id}', [UsersController::class, 'show']);
     Route::get('/', [UsersController::class, 'get']);
+    Route::delete('/{id}', [UsersController::class, 'delete']);
+    Route::post('/group/join', [UsersController::class, 'joinToGroup']);
+    Route::post('/group/leave', [UsersController::class, 'leaveToGroup']);
 });
 //Route::middleware(['auth:api'])->group(function () {
 //    Route::prefix('/executors')->group(function () {

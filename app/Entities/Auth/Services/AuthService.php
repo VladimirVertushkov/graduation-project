@@ -33,7 +33,8 @@ class AuthService extends ServiceBase
 
         $token = $user->createToken($deviceName);
 
-        return ['token' => $token->plainTextToken];
+        return ['token' => $token->plainTextToken,
+            'id' => $user->id];
         //$token = $user->createToken('Token Name')->accessToken;
         //$token = $user->createToken($deviceName);
         //$token->expires_at = Carbon::now()->addYear();

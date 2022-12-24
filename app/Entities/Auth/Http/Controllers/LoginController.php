@@ -2,6 +2,7 @@
 
 namespace App\Entities\Auth\Http\Controllers;
 
+use App\Entities\Auth\Http\Requests\LoginRequest;
 use App\Entities\Auth\Services\AuthService;
 use App\Exceptions\ResponseFormatException;
 use App\Http\Controllers\Api\ControllerBase;
@@ -22,14 +23,14 @@ class LoginController extends ControllerBase
         parent::__construct();
     }
 
-    public function authenticate(Request $request)
+    public function authenticate(LoginRequest $request)
     {
         return $this->response([
             'status' => 'ok',
             'data' => $this->authService->login(
                 $request->email,
                 $request->password,
-                $request->deviceName,
+                $request->deviceId,
             )
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entities\Groups\Http\Controllers;
 
+use App\Entities\Groups\Http\Requests\GetGroupRequest;
 use App\Entities\Groups\Services\GroupsService;
 use App\Http\Controllers\Api\ControllerBase;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class GroupsController extends ControllerBase
         parent::__construct();
     }
 
-    public function get(Request $request)
+    public function get(GetGroupRequest $request)
     {
         $response = $this->groupsService->get($request->all());
         return $this->response(['status' => 'ok', 'data' => $response]);
@@ -25,4 +26,9 @@ class GroupsController extends ControllerBase
         return $this->response(['status' => 'ok', 'data' => $response]);
     }
 
+    public function create(Request $request)
+    {
+        $this->groupsService->create($request->all());
+        return $this->response(['status' => 'ok']);
+    }
 }

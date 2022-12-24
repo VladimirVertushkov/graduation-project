@@ -11,9 +11,12 @@ class GroupGetResources extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'admin' => $this->admin->name,
+            'admin' => [
+                'id' => $this->admin->id,
+                'name' => $this->admin->name,
+            ],
             'competition' => $this->competition->name,
-            'createdAt' => $this->created_at,
+            'createdAt' => date('d.m.Y', strtotime($this->created_at)),
         ];
     }
 }

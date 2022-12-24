@@ -6,6 +6,7 @@ use App\Base\Services\ServiceBase;
 use App\Entities\Groups\Models\Group;
 use App\Entities\Groups\Resources\GroupGetResources;
 use App\Entities\Groups\Resources\GroupShowResources;
+use Illuminate\Support\Facades\Auth;
 
 
 class GroupsService extends ServiceBase
@@ -29,6 +30,18 @@ class GroupsService extends ServiceBase
             ->findOrFail($id);
 
         return new GroupShowResources($group);
+    }
+
+    public function create(array $data)
+    {
+        $group = new Group;
+        $group->name = $data['name'];
+        $group->admin_id = Auth::user()->id;
+        $group->competition_id = $data['competitionId'];
+        $group->save();
+        $userId = Auth::user()->id;
+        $group->users()->attach($userId);
+
     }
 
 }
