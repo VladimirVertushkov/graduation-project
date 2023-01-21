@@ -6,7 +6,7 @@ use App\Entities\Competitions\Services\CompetitionsService;
 use App\Http\Controllers\Api\ControllerBase;
 use Illuminate\Http\Request;
 
-class CompetitionsController  extends ControllerBase
+class CompetitionsController extends ControllerBase
 {
     public function __construct(protected CompetitionsService $competitionsService)
     {
