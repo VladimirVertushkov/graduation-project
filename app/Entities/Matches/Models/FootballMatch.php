@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Entities\Matches;
+namespace App\Entities\Matches\Models;
 
 use App\Entities\Commands\Models\Command;
-use App\Entities\Countries\Models\Country;
-use App\Entities\Groups\Models\Group;
+use App\Entities\Competitions\Models\Competition;
+use App\Entities\Forecasts\Models\Forecast;
 use App\Traits\Uuid;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,6 +16,7 @@ class FootballMatch extends Model
 {
     use HasFactory;
     use Uuid;
+    use Filterable;
 
     protected $table = 'matches';
 
@@ -95,11 +97,26 @@ class FootballMatch extends Model
      */
     public function commandFirst(): BelongsTo
     {
-        return $this->belongsTo(Command::class);
+        return $this->belongsTo(Command::class, 'command_first_id');
     }
 
     public function commandSecond(): BelongsTo
     {
-        return $this->belongsTo(Command::class);
+        return $this->belongsTo(Command::class, 'command_second_id');
+    }
+
+    public function winner(): BelongsTo
+    {
+        return $this->belongsTo(Command::class, 'winner_id');
+    }
+
+    public function competition(): BelongsTo
+    {
+        return $this->belongsTo(Competition::class);
+    }
+
+    public function forecasts(): HasMany
+    {
+        return $this->hasMany(Forecast::class, 'match_id');
     }
 }

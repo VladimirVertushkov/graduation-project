@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Entities\Commands\Models\Command;
 use App\Entities\Competitions\Models\Competition;
 use App\Entities\Countries\Models\Country;
-use App\Entities\Matches\FootballMatch;
+use App\Entities\Matches\Models\FootballMatch;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -185,6 +185,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => 3,
                 'status' => 'ended',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2022-11-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id,
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Rostov')->first()->id,
@@ -194,6 +195,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => 0,
                 'status' => 'ended',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2022-11-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'CSKA')->first()->id,
@@ -203,6 +205,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => 0,
                 'status' => 'ended',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2022-11-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Orenburg')->first()->id,
@@ -212,6 +215,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => 3,
                 'status' => 'ended',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2022-11-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Sochi')->first()->id,
@@ -221,6 +225,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => 2,
                 'status' => 'ended',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2022-11-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Krylya Sovetov')->first()->id,
@@ -230,6 +235,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => 0,
                 'status' => 'ended',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2022-11-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Fakel')->first()->id,
@@ -239,6 +245,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => 1,
                 'status' => 'ended',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2022-11-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Khimki')->first()->id,
@@ -248,6 +255,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => 0,
                 'status' => 'ended',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2022-11-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
 
             [
@@ -258,6 +266,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => null,
                 'status' => 'wait',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2023-02-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Rostov')->first()->id,
@@ -267,6 +276,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => null,
                 'status' => 'wait',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2023-02-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Orenburg')->first()->id,
@@ -276,6 +286,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => null,
                 'status' => 'wait',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2023-02-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'CSKA')->first()->id,
@@ -285,6 +296,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => null,
                 'status' => 'wait',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2023-02-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Locomotiv')->first()->id,
@@ -294,6 +306,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => null,
                 'status' => 'wait',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2023-02-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Khimki')->first()->id,
@@ -303,6 +316,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => null,
                 'status' => 'wait',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2023-02-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Fakel')->first()->id,
@@ -312,6 +326,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => null,
                 'status' => 'wait',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2023-02-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
             [
                 'command_first_id' => DB::table('commands')->where('name', 'Krylya Sovetov')->first()->id,
@@ -321,6 +336,7 @@ class DemoDataSeeder extends Seeder
                 'command_second_goals' => null,
                 'status' => 'wait',
                 'date_of_match' => Carbon::createFromFormat('Y-m-d', '2023-02-11'),
+                'competition_id' => Competition::where('name', 'RPL')->first()->id
             ],
         ];
 
