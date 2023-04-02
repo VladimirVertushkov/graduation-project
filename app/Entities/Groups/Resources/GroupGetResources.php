@@ -17,6 +17,8 @@ class GroupGetResources extends JsonResource
             ],
             'competition' => $this->competition->name,
             'createdAt' => date('d.m.Y', strtotime($this->created_at)),
+            'usersCount' => $this->users_count,
+            'userBelong' => $this->userBelong,
         ];
     }
 }

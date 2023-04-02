@@ -16,10 +16,23 @@ class GroupsService extends ServiceBase
         parent::__construct();
     }
 
-    public function get(array $all)
+    public function get(array $data)
     {
-        $groups = Group::with(['competition', 'admin'])
+        $user = Auth::user();
+        $groups = Group::with(['competition', 'admin',
+            'users' => function($q){
+            $q->select('id');
+            }])
+            ->withCount('users')
             ->get();
+
+        foreach ($groups as $group){
+            if($user && in_array($user->id, $group->users->pluck('id')->toArray())){
+                $group->userBelong = true;
+            }else{
+                $group->userBelong = false;
+            }
+        }
 
         return GroupGetResources::collection($groups)->toArray(request());
     }

@@ -28,10 +28,10 @@ abstract class ServiceBase
      */
     public function __construct()
     {
-//        $user = auth()->user() ?? auth()->guard('api')->user();
-//        if ($user) {
-//            $this->setUser($user);
-//        }
+        $user = auth()->user();
+        if ($user) {
+            $this->setUser($user);
+        }
     }
 
     /**
@@ -43,7 +43,6 @@ abstract class ServiceBase
     public function setUser(User $user)
     {
         $this->user = $user;
-        $this->user_organisation_id = $user->organisation_id ?? null;
     }
 
     /**

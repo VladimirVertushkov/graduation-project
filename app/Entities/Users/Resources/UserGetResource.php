@@ -10,7 +10,7 @@ class UserGetResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'fullName' => $this->name,
+            'name' => $this->name,
             'createdAt' => $this->created_at,
             'birthday' => $this->date_of_birth,
         ];
