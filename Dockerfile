@@ -19,6 +19,14 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Install "curl", "libmemcached-dev", "libpq-dev", "libjpeg-dev",
 #         "libpng-dev", "libfreetype6-dev", "libssl-dev", "libmcrypt-dev",
+WORKDIR /var/www
+
+COPY . /var/www/
+
+COPY ./php/local.ini /usr/local/etc/php/conf.d/local.ini
+
+RUN chmod -R 777 storage
+
 RUN set -eux; \
     apt-get update; \
     apt-get upgrade -y; \
@@ -34,7 +42,9 @@ RUN set -eux; \
             libwebp-dev \
             libxpm-dev \
             libmcrypt-dev \
-            libonig-dev; \
+            libonig-dev \
+            unzip \
+            git; \
     rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \
@@ -51,3 +61,7 @@ RUN set -eux; \
             --with-freetype; \
     docker-php-ext-install gd; \
     php -r 'var_dump(gd_info());'
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    composer update -o -vvv && \
+    composer i
