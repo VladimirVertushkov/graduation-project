@@ -14,6 +14,8 @@ class GroupsService extends ServiceBase
     public function __construct()
     {
         parent::__construct();
+
+        $this->user = Auth::user();
     }
 
     public function get(array $data)
@@ -40,7 +42,14 @@ class GroupsService extends ServiceBase
     public function show(string $id)
     {
         $group = Group::with(['competition', 'admin', 'users'])
+            ->withCount('users')
             ->findOrFail($id);
+
+        if($this->user && in_array($this->user->id, $group->users->pluck('id')->toArray())){
+            $group->userBelong = true;
+        }else{
+            $group->userBelong = false;
+        }
 
         return new GroupShowResources($group);
     }

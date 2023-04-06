@@ -20,6 +20,8 @@ class GroupShowResources extends JsonResource
             'competition' => $this->competition->name,
             'users' => UserGetResource::collection($this->users),
             'createdAt' => $this->created_at,
+            'usersCount' => $this->users_count,
+            'userBelong' => $this->userBelong,
         ];
     }
 }
