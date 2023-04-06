@@ -28,7 +28,7 @@ class GroupsController extends ControllerBase
 
     public function create(Request $request)
     {
-        $this->groupsService->create($request->all());
-        return $this->response(['status' => 'ok']);
+        $response = $this->groupsService->create($request->all());
+        return $this->response(['status' => 'ok', 'id' => $response]);
     }
 }

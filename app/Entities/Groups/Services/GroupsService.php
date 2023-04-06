@@ -55,6 +55,8 @@ class GroupsService extends ServiceBase
         $userId = Auth::user()->id;
         $group->users()->attach($userId);
 
+        return $group->id;
+
     }
 
 }
