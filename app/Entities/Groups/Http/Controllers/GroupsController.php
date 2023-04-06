@@ -31,4 +31,10 @@ class GroupsController extends ControllerBase
         $response = $this->groupsService->create($request->all());
         return $this->response(['status' => 'ok', 'id' => $response]);
     }
+
+    public function delete(string $id)
+    {
+        $this->groupsService->delete($id);
+        return $this->response(['status' => 'ok']);
+    }
 }

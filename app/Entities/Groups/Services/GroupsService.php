@@ -68,4 +68,9 @@ class GroupsService extends ServiceBase
 
     }
 
+    public function delete(string $id)
+    {
+        Group::find($id)->delete();
+    }
+
 }
