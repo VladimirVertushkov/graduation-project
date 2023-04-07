@@ -27,14 +27,6 @@ class GroupsService extends ServiceBase
             ->withCount('users')
             ->get();
 
-        foreach ($groups as $group){
-            if($user && in_array($user->id, $group->users->pluck('id')->toArray())){
-                $group->userBelong = true;
-            }else{
-                $group->userBelong = false;
-            }
-        }
-
         return GroupGetResources::collection($groups)->toArray(request());
     }
 
@@ -43,12 +35,6 @@ class GroupsService extends ServiceBase
         $group = Group::with(['competition', 'admin', 'users'])
             ->withCount('users')
             ->findOrFail($id);
-
-        if($this->user && in_array($this->user->id, $group->users->pluck('id')->toArray())){
-            $group->userBelong = true;
-        }else{
-            $group->userBelong = false;
-        }
 
         return new GroupShowResources($group);
     }

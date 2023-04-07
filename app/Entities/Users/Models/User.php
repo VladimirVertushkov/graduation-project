@@ -114,6 +114,6 @@ class User extends BaseUserModel
      */
     public function groups(): BelongsToMany
     {
-        return $this->belongsToMany(Group::class, 'user_group');
+        return $this->belongsToMany(Group::class, 'user_group')->withPivot('scores');
     }
 }

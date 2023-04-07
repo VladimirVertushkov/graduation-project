@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class
@@ -114,11 +115,20 @@ class Group extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'user_group');
+        return $this->belongsToMany(User::class, 'user_group')->withPivot('scores');
     }
 
     public function forecasts(): HasMany
     {
         return $this->hasMany(Forecast::class, 'user_id');
+    }
+
+    public function getUserBelongAttribute()
+    {
+        if(Auth::user() && in_array(Auth::user()->id, $this->users->pluck('id')->toArray())){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

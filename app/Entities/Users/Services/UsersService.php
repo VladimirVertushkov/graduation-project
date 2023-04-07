@@ -7,6 +7,7 @@ use App\Entities\Auth\Services\AuthService;
 use App\Entities\Countries\Models\Country;
 use App\Entities\Users\Models\User;
 use App\Entities\Users\Resources\UserGetResource;
+use App\Entities\Users\Resources\UserShowResource;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -48,7 +49,8 @@ class UsersService extends ServiceBase
 
     public function get(array $data)
     {
-        $users = User::get();
+        $users = User::with('groups')
+            ->get();
 
         return UserGetResource::collection($users)->toArray(request());
     }
@@ -56,9 +58,12 @@ class UsersService extends ServiceBase
 
     public function show(string $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::with(['groups' => function ($q) {
+            $q->withCount('users');
+        }])
+            ->findOrFail($id);
 
-        return new UserGetResource($user);
+        return new UserShowResource($user);
     }
 
     public function delete(string $id)
