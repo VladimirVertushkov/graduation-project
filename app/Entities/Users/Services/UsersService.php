@@ -6,6 +6,7 @@ use App\Base\Services\ServiceBase;
 use App\Entities\Auth\Services\AuthService;
 use App\Entities\Countries\Models\Country;
 use App\Entities\Users\Models\User;
+use App\Entities\Users\Resources\UserGetForGroupResource;
 use App\Entities\Users\Resources\UserGetResource;
 use App\Entities\Users\Resources\UserShowResource;
 use Exception;
@@ -82,5 +83,15 @@ class UsersService extends ServiceBase
     {
         $user = Auth::user();
         $user->groups()->detach($data['groupId']);
+    }
+
+    public function getForGroup(array $data)
+    {
+        $users = User::with(['groups' => function($q) use ($data) {
+            $q->where('id', $data['groupId']);
+        }])
+            ->get();
+
+        return UserGetForGroupResource::collection($users)->toArray(request());
     }
 }

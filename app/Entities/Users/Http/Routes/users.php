@@ -4,6 +4,7 @@ use App\Entities\Users\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/for-group', [UsersController::class, 'getForGroup']);
     Route::get('/{id}', [UsersController::class, 'show']);
     Route::get('/', [UsersController::class, 'get']);
     Route::delete('/{id}', [UsersController::class, 'delete']);

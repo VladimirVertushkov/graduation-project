@@ -5,7 +5,6 @@ namespace App\Entities\Users\Http\Controllers;
 use App\Entities\Users\Services\UsersService;
 use App\Http\Controllers\Api\ControllerBase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -89,5 +88,12 @@ class UsersController extends ControllerBase
     {
         $this->userService->leaveToGroup($request->all());
         return $this->response(['status' => 'ok']);
+    }
+
+    public function getForGroup(Request $request)
+    {
+        $response = $this->userService->getForGroup($request->all());
+
+        return $this->response(['status' => 'ok', 'data' => $response]);
     }
 }
