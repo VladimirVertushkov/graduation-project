@@ -28,6 +28,11 @@ class MatchesGetResource extends JsonResource
                     'id' => $this->competition->id,
                     'name' => $this->competition->name,
                 ] : null,
+            'forecast' => !empty($this->forecasts->toArray()) ? [
+                'commandFirstGoals' => $this->forecasts[0]->command_first_goals,
+                'commandSecondGoals' => $this->forecasts[0]->command_second_goals,
+                'winner_id' => $this->forecasts[0]->winner_id,
+            ] : null,
             'status' => $this->status,
             'dateOfMatch' => date('d.m.Y', strtotime($this->date_of_match)),
         ];

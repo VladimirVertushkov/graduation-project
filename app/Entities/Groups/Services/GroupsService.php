@@ -8,7 +8,6 @@ use App\Entities\Groups\Resources\GroupGetResources;
 use App\Entities\Groups\Resources\GroupShowResources;
 use Illuminate\Support\Facades\Auth;
 
-
 class GroupsService extends ServiceBase
 {
     public function __construct()
